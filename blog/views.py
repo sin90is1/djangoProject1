@@ -1,21 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-
+#from django.http import HttpResponse, JsonResponse
+from .models import Article
 
 def home(request):
     context = {
-        "articles": [
-            {
-                "title": " تیم ملی زیرورو شد؛ خداحافظی با معروف و دوستان!",
-                "description": "دروازه‌بان تیم فوتبال خلیج فارس ماهشهر که تیمش توانست با درخشش او به نیمه نهایی جام حذفی برسد، از روزهای سخت پیش از این موفقیت حرف زده است.",
-                "img": "https://news.varzeshe3.com/pictures/2022/04/10/B/smszcsni.jpg?w=350"
-
-            },
-            {
-                "title": "مصیبت در انتظار رونالدو؛ نوجوان مضروب اوتیسم دارد (عکس)",
-                "description": "تیم ملی زیرورو شد؛ خداحافظی با معروف و دوستان!",
-                "img": "https://news.varzeshe3.com/pictures/2022/04/10/D/lltropm4.jpg?w=350"
-            }
-        ]
+        "articles": Article.objects.filter(status="p").order_by('-publish')
     }
     return render(request, "blog/home.html", context)

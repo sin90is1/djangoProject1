@@ -7,5 +7,6 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ('publish', 'status')
     search_fields = ('title', 'description')
     prepopulated_fields = {'slug': ('title',)}
+    ordering = ['status', '-publish']
 
 admin.site.register(Article, ArticleAdmin)
